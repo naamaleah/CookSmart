@@ -1,0 +1,150 @@
+/* file: frontend/views/style.qss */
+
+/* ===== Tabs styling ===== */
+QTabWidget::pane {
+    border-top: 2px solid #E2742D;  /* Accent orange border at the top */
+    background: transparent;        /* Transparent background for a clean look */
+    margin-top: -1px;               /* Slight overlap adjustment */
+}
+
+/* ===== Recipe cards ===== */
+QFrame#RecipeCard {
+    background-color: #FFF4E8;      /* Soft cream background */
+    border-radius: 12px;            /* Rounded corners */
+    padding: 10px;                  /* Inner padding */
+    border: 1px solid #E2742D;      /* Orange border */
+}
+
+QLabel#RecipeCardTitle {
+    font-size: 15px;
+    font-weight: bold;
+    color: #5C3A1B;                 /* Dark brown text for emphasis */
+}
+
+/* ===== Favorite cards ===== */
+QFrame#FavoriteCard {
+    background-color: #FFEBD9;      /* Slightly warmer cream background */
+    border-radius: 12px;
+    border: 1px solid #E2742D;
+}
+
+/* ===== Special boxes ===== */
+QFrame#GreetingBox {
+    background-color: #FFF3E2;      /* Light cream greeting background */
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #E2742D;
+}
+
+QFrame#AITipBox {
+    background-color: #E8F5E9;      /* Soft green for AI tip box */
+    border: 1px solid #3A6A37;      /* Dark green border */
+    border-radius: 10px;
+    padding: 12px;
+}
+
+QFrame#RecentRecipesBox {
+    background-color: transparent;  /* Transparent container for recent recipes */
+}
+
+QLabel#AITipTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3A6A37;                 /* Dark green for AI tips title */
+}
+
+QFrame#clear_frame {
+    background-color: rgba(246, 231, 213, 180);  /* Semi-transparent beige (~70% opacity) */
+}
+
+QFrame#totaly_clear_frame {
+    background-color: transparent;
+    border: none;
+}
+
+/* ===== Scroll area styling ===== */
+QScrollArea, QScrollArea QWidget, QScrollArea QViewport {
+    background: transparent;
+    border: none;
+}
+
+/* ===== Global font and text styling ===== */
+* {
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 15px;         /* Increased base font size */
+    font-weight: bold;
+    color: #5C3A1B;          /* Dark brown text color */
+}
+
+QLineEdit, QComboBox, QTextEdit {
+    padding: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;  /* Light gray border for inputs */
+}
+
+QFrame#IngredientTag QLabel {
+    background-color: transparent;  /* Transparent background for ingredient tags */
+    font-weight: bold;
+    font-size: 13px;
+}
+
+/* ===== AI Chat button (floating round) ===== */
+QPushButton#AIChatButton {
+    border-radius: 25px;            /* Circular button */
+    background-color: #FFF4E8;      /* Matches card background */
+    color: white;
+    font-size: 20px;
+    border: 1px solid #E2742D;
+}
+
+/* ===== Chat action buttons ===== */
+QPushButton#ChatButton {
+    color: #0F172A;                 
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-weight: bold;
+}
+
+/* ===== System messages (QMessageBox) ===== */
+QMessageBox#InfoBox {
+    background-color: #FFF4E8;
+    border: 2px solid #2563eb;   /* Blue border for info */
+    border-radius: 12px;
+}
+
+QMessageBox#SuccessBox {
+    background-color: #E8F5E9;   /* Green background for success */
+    border: 2px solid #16a34a;   /* Green border */
+    border-radius: 12px;
+}
+
+QMessageBox#ErrorBox {
+    background-color: #FFEBD9;   /* Red-tinted background for errors */
+    border: 2px solid #dc2626;   /* Red border */
+    border-radius: 12px;
+}
+
+QMessageBox#ConfirmBox {
+    background-color: #FFF3E2;   /* Cream background for confirmation dialogs */
+    border: 2px solid #E2742D;   /* Orange border */
+    border-radius: 12px;
+}
+
+/* ===== MessageBox inner text and buttons ===== */
+QMessageBox QLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #5C3A1B;             /* Consistent brown text */
+}
+
+QMessageBox QPushButton {
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-weight: bold;
+    background-color: #FDBA74;  /* Orange buttons */
+    color: #0F172A;
+}
+
+QMessageBox QPushButton:hover {
+    background-color: #FB923C;  /* Darker orange on hover */
+}
