@@ -8,9 +8,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env file (optional but recommended)
 load_dotenv()
 
-from backend.api.routers import recipes, favorites, auth
-from backend.api.routers import ai_agent
-from backend.api.routers import rag
+from backend.api.routers import recipes, favorites, auth, ai_agent, rag, images
 
 # Gateway dependency injection
 from backend.gateway import Gateway, GatewayConfig
@@ -38,3 +36,4 @@ app.include_router(favorites.router, prefix="/favorites", tags=["Favorites"])
 app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
 app.include_router(ai_agent.router, prefix="/ai", tags=["AI Agent"])
 app.include_router(rag.router)
+app.include_router(images.router)

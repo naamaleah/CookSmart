@@ -9,7 +9,6 @@ OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3"
 OLLAMA_TIMEOUT = (8, 120)
 
-
 # ---------------------------
 # Internal helper
 # ---------------------------
@@ -121,24 +120,41 @@ def search_by_ingredients(ingredients_list):
         return []
 
 
+
+def upload_image(token: str, image_path: str) -> tuple[bool, str]:
+    """Upload an image file to Cloudinary via backend."""
+    url = f"{API_BASE_URL}/images/upload"
+    headers = {"Authorization": f"Bearer {token}"}
+    try:
+        with open(image_path, "rb") as f:
+            files = {"image": f}
+            r = requests.post(url, headers=headers, files=files, timeout=60)
+            r.raise_for_status()
+            return True, r.json().get("secure_url", "")
+    except requests.RequestException as e:
+        return False, str(e)
+
+
 def add_recipe(token: str, name: str, category: str,
                area: str, instructions: str,
-               thumbnail_url: str, ingredients):
-    """Add a new recipe."""
+               thumbnail_url: str, ingredients: list[str]):
+    """Add a new recipe with JSON (ingredients stays as a List)."""
+    url = f"{API_BASE_URL}/recipes/add"
+    headers = {"Authorization": f"Bearer {token}"}
+    payload = {
+        "name": name,
+        "category": category,
+        "area": area,
+        "instructions": instructions,
+        "thumbnail_url": thumbnail_url,
+        "ingredients": ingredients,
+    }
     try:
-        _request("POST", "/recipes/add",
-                 token=token,
-                 json={
-                     "name": name, "category": category, "area": area,
-                     "instructions": instructions, "thumbnail_url": thumbnail_url,
-                     "ingredients": ingredients
-                 }, timeout=45)
+        r = requests.post(url, headers=headers, json=payload, timeout=60)
+        r.raise_for_status()
         return True, "Recipe added."
     except requests.RequestException as e:
-        try:
-            return False, e.response.json().get("error", "Unknown error.")
-        except Exception:
-            return False, str(e)
+        return False, str(e)
 
 
 def get_recommendations(userid: int):

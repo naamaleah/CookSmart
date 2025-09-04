@@ -1,7 +1,7 @@
 # frontend/views/add_recipe_view.py
 from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QTextEdit,
-    QPushButton, QComboBox, QFrame, QScrollArea
+    QPushButton, QComboBox, QFrame, QScrollArea, QFileDialog
 )
 from PySide6.QtCore import Qt
 from presenters.add_recipe_presenter import AddRecipePresenter
@@ -15,7 +15,7 @@ class AddRecipeView(BaseView):
     """
     View for adding a new recipe.
     Provides a three-column layout:
-      - Left: General recipe information (name, category, area, thumbnail URL).
+      - Left: General recipe information (name, category, area, thumbnail URL, image upload).
       - Center: Ingredients input and tag list.
       - Right: Instructions text area.
     Connected to `AddRecipePresenter` for business logic.
@@ -28,6 +28,7 @@ class AddRecipeView(BaseView):
         self.setMinimumSize(950, 600)
 
         self.ingredients = []
+        self.image_path = None  # Will hold the path of the uploaded image
 
         # Main container layout
         main_layout = QVBoxLayout(self)
@@ -87,7 +88,13 @@ class AddRecipeView(BaseView):
         self._add_labeled_widget(left_col, "Area:", self.area_input)
         left_col.addStretch(1)
 
-        self.thumbnail_input = self._add_labeled_input(left_col, "Image URL:")
+        self.thumbnail_input = self._add_labeled_input(left_col, "Image path:")
+        left_col.addStretch(1)
+
+        # New button to choose an image file
+        self.image_btn = QPushButton("Choose Image")
+        self._add_labeled_widget(left_col, "Upload Image:", self.image_btn)
+        self.image_btn.clicked.connect(self._choose_image)
         left_col.addStretch(3)
 
         content_row.addLayout(left_col, stretch=3)
@@ -140,9 +147,16 @@ class AddRecipeView(BaseView):
         self.ingredient_input.returnPressed.connect(self.presenter.add_ingredient)
         self.submit_btn.clicked.connect(self.presenter.submit_recipe)
 
+    def _choose_image(self):
+        """Open file dialog to choose an image from local machine."""
+        file_path, _ = QFileDialog.getOpenFileName(self, "Select Image", "", "Images (*.png *.jpg *.jpeg)")
+        if file_path:
+            self.image_path = file_path
+            # Show path in the URL field for consistency
+            self.thumbnail_input.setText(file_path)
+
     # --- Helper wrappers ---
     def _add_labeled_input(self, layout, label_text: str) -> QLineEdit:
-        """Add a labeled QLineEdit to the given layout."""
         box = QVBoxLayout()
         label = QLabel(label_text)
         label.setStyleSheet("font-weight: bold; font-size: 13px;")
@@ -156,7 +170,6 @@ class AddRecipeView(BaseView):
         return field
 
     def _add_labeled_widget(self, layout, label_text: str, widget: QWidget) -> None:
-        """Add a labeled widget (e.g., QComboBox) to the given layout."""
         box = QVBoxLayout()
         label = QLabel(label_text)
         label.setStyleSheet("font-weight: bold; font-size: 13px;")
@@ -168,20 +181,15 @@ class AddRecipeView(BaseView):
         layout.addWidget(container)
 
     def _column_label(self, text: str) -> QLabel:
-        """Create a bold column header label."""
         label = QLabel(text)
         label.setAlignment(Qt.AlignCenter)
         label.setStyleSheet("font-weight: bold; font-size: 16px; padding-bottom: 6px;")
         return label
 
-    # Wrapper to prevent presenter breakage
     def create_ingredient_tag(self, ingredient_name: str, remove_callback) -> QFrame:
-        """Delegate ingredient tag creation to the shared widget factory."""
         return _create_tag(ingredient_name, remove_callback)
 
-    # --- Reset form ---
     def reset_form(self) -> None:
-        """Clear all inputs and reset the form state."""
         self.name_input.clear()
         self.thumbnail_input.clear()
         self.instructions_input.clear()
@@ -189,6 +197,7 @@ class AddRecipeView(BaseView):
         self.category_input.setCurrentText("")
         self.area_input.setCurrentIndex(-1)
         self.area_input.setCurrentText("")
+        self.image_path = None
 
         # Clear ingredient tags
         layout = self.ingredient_layout

@@ -1,11 +1,10 @@
 # backend/api/routers/ai_agent.py
 from fastapi import APIRouter, Depends, Query
-
 from backend.api.deps import get_gateway
 from backend.gateway import Gateway
 from backend.services.ai_agent_service import AIAgentService
 
-# Router for AI Agent endpoints (no prefix for cleaner URLs)
+# Router for AI Agent endpoints
 router = APIRouter(prefix="", tags=["AI Agent"])
 
 @router.get("/ask")

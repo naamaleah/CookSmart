@@ -237,8 +237,10 @@ class Gateway:
         data = {
             "folder": folder or "",
             "public_id": os.path.splitext(filename)[0],
-            "upload_preset": "",
+            "upload_preset": os.getenv("CLOUDINARY_UPLOAD_PRESET", ""),
         }
+
+
         files = {"file": (filename, file_bytes)}
         await self._cb_cloudinary.allow()
         try:
