@@ -24,7 +24,7 @@ class AddRecipeView(BaseView):
     def __init__(self, token: str):
         super().__init__()
         self.token = token
-        self.setWindowTitle("➕ Add New Recipe")
+        self.setWindowTitle(" Add New Recipe")
         self.setMinimumSize(950, 600)
 
         self.ingredients = []

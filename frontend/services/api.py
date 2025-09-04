@@ -138,7 +138,7 @@ def upload_image(token: str, image_path: str) -> tuple[bool, str]:
 def add_recipe(token: str, name: str, category: str,
                area: str, instructions: str,
                thumbnail_url: str, ingredients: list[str]):
-    """Add a new recipe with JSON (ingredients stays as a List)."""
+    """Add a new recipe with JSON"""
     url = f"{API_BASE_URL}/recipes/add"
     headers = {"Authorization": f"Bearer {token}"}
     payload = {
