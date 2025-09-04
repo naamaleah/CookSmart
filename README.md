@@ -64,11 +64,10 @@ uvicorn backend.api.main:app --reload
 
 ### 3. Frontend Setup
 ```bash
-cd frontend
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python main.py
+python frontend/main.py
 ```
 
 ### 4. Database
