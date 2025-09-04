@@ -59,7 +59,7 @@ cd backend
 python -m venv venv
 source venv/bin/activate   # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-uvicorn api.main:app --reload
+uvicorn backend.api.main:app --reload
 ```
 
 ### 3. Frontend Setup
