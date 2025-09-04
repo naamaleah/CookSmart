@@ -5,7 +5,7 @@ from backend.utils.auth_utils import get_current_user
 from backend.services import favorites_command_service, favorites_query_service
 
 # Router for managing user favorites
-router = APIRouter(prefix="", tags=["Favorites"])
+router = APIRouter(prefix="/favorites", tags=["Favorites"])
 
 class FavoriteRequest(BaseModel):
     recipeid: int

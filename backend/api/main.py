@@ -31,9 +31,9 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 # Register routers
-app.include_router(recipes.router, prefix="/recipes", tags=["Recipes"])
-app.include_router(favorites.router, prefix="/favorites", tags=["Favorites"])
-app.include_router(auth.router, prefix="/auth", tags=["Authentication"])
-app.include_router(ai_agent.router, prefix="/ai", tags=["AI Agent"])
+app.include_router(recipes.router)
+app.include_router(favorites.router)
+app.include_router(auth.router)
+app.include_router(ai_agent.router)
 app.include_router(rag.router)
 app.include_router(images.router)

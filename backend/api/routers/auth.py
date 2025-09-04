@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from backend.services import auth_command_service
 
 # Router for authentication endpoints
-router = APIRouter(tags=["Authentication"])
+router = APIRouter(prefix="/auth", tags=["Authentication"])
 
 @router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends()):

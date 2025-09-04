@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from backend.services import recipes_command_service, recipes_query_service
 from backend.services.recipes_command_service import NewRecipe
 
-router = APIRouter(prefix="", tags=["Recipes"])
+router = APIRouter(prefix="/recipes", tags=["Recipes"])
 
 @router.post("/add")
 def add_recipe(recipe: NewRecipe):

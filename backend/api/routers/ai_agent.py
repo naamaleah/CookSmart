@@ -5,7 +5,7 @@ from backend.gateway import Gateway
 from backend.services.ai_agent_service import AIAgentService
 
 # Router for AI Agent endpoints
-router = APIRouter(prefix="", tags=["AI Agent"])
+router = APIRouter(prefix="/ai", tags=["AI Agent"])
 
 @router.get("/ask")
 async def consult_ai(
