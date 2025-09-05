@@ -148,3 +148,4 @@ QMessageBox QPushButton {
 QMessageBox QPushButton:hover {
     background-color: #FB923C;  /* Darker orange on hover */
 }
+

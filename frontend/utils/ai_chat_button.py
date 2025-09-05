@@ -1,6 +1,6 @@
 # frontend/utils/ai_chat_button.py
 from PySide6.QtWidgets import QPushButton, QWidget
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import QTimer
 from views.ai_consult_panel import AIConsultPanel  # Chat panel container
 
 
