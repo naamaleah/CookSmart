@@ -146,7 +146,7 @@ curl http://localhost:11434/api/tags
 
 ## 👥 Authors
 - Naama Leah
-- Ester
+- Ester Dray
 
 ---
 
